@@ -18,10 +18,14 @@
   --amber-dim: #78450A;
   --green: #22C55E;
   --green-dim: #14532D;
+  --yellow: #EAB308;
+  --yellow-dim: #713F12;
   --red: #EF4444;
   --red-dim: #7F1D1D;
   --blue: #3B82F6;
   --blue-dim: #1E3A5F;
+  --purple: #A855F7;
+  --purple-dim: #581C87;
   --text: #E6EDF3;
   --muted: #8B949E;
   --muted2: #484F58;
@@ -33,9 +37,11 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 button { cursor: pointer; border: none; font-family: inherit; transition: opacity .15s, transform .1s; }
 button:active { opacity: .75; transform: scale(.97); }
 input { font-family: inherit; }
+
 /* ===== SCREENS ===== */
 .screen { display: none; min-height: 100vh; flex-direction: column; }
 .screen.active { display: flex; }
+
 /* ===== HEADER ===== */
 .header {
   position: sticky; top: 0; z-index: 50;
@@ -47,15 +53,35 @@ input { font-family: inherit; }
 .header-icon { font-size: 22px; }
 .header h1 { font-size: 18px; font-weight: 700; flex: 1; }
 .header-sub { font-size: 13px; color: var(--muted); }
+
 /* ===== SCROLL BODY ===== */
-.scroll-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 100px; }
+.scroll-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 110px; }
+
 /* ===== SECTION CARD ===== */
 .section-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .section-header { padding: 14px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); background: var(--card2); }
 .section-header .icon { font-size: 18px; }
 .section-header h2 { font-size: 15px; font-weight: 700; flex: 1; }
 .section-header .count { background: var(--amber-dim); color: var(--amber); font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-/* ===== CHIP LIST ===== */
+
+/* ===== PRODUCT LIST (with price) ===== */
+.product-list { display: flex; flex-direction: column; }
+.product-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.product-row:last-child { border-bottom: none; }
+.product-name { flex: 1; font-size: 14px; font-weight: 600; }
+.product-price { font-size: 14px; font-weight: 700; color: var(--green); min-width: 56px; text-align: right; }
+.product-del { width: 28px; height: 28px; border-radius: 50%; background: var(--red-dim); color: var(--red); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.product-input-row { padding: 10px 14px 14px; display: flex; gap: 8px; align-items: center; }
+.product-input-row input[type=text] { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 15px; color: var(--text); outline: none; min-width: 0; }
+.product-input-row input[type=number] { width: 80px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 10px; font-size: 15px; color: var(--text); outline: none; flex-shrink: 0; }
+.product-input-row input:focus { border-color: var(--amber); }
+.product-input-row button { background: var(--amber); color: #000; font-weight: 700; font-size: 20px; width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0; }
+
+/* ===== CHIP LIST (people only) ===== */
 .chip-list { padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; }
 .chip { display: flex; align-items: center; gap: 6px; background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 10px 6px 12px; font-size: 14px; }
 .chip .chip-del { width: 20px; height: 20px; border-radius: 50%; background: var(--muted2); color: var(--text); font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -63,22 +89,33 @@ input { font-family: inherit; }
 .chip-input-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 15px; color: var(--text); outline: none; }
 .chip-input-row input:focus { border-color: var(--amber); }
 .chip-input-row button { background: var(--amber); color: #000; font-weight: 700; font-size: 20px; width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0; }
+
 /* ===== BOTTOM BAR ===== */
 .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: var(--card); border-top: 1px solid var(--border); z-index: 50; }
 .btn-primary { width: 100%; background: var(--amber); color: #000; font-weight: 800; font-size: 17px; padding: 16px; border-radius: var(--radius); letter-spacing: .3px; }
 .btn-secondary { background: var(--card2); color: var(--text); border: 1px solid var(--border); font-weight: 600; font-size: 15px; padding: 12px 16px; border-radius: var(--radius-sm); }
 .btn-danger { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); font-weight: 600; font-size: 14px; padding: 10px 16px; border-radius: var(--radius-sm); }
 .btn-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--card2); border: 1px solid var(--border); flex-shrink: 0; }
-/* ===== ORDER SCREEN ===== */
-.search-bar { padding: 12px 16px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
-.search-bar input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 9px 16px; font-size: 15px; color: var(--text); outline: none; }
-.search-bar input:focus { border-color: var(--amber); }
+
+/* ===== STATS CARD ===== */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.stat-card.full { grid-column: 1/-1; flex-direction: row; align-items: center; gap: 14px; }
+.stat-icon { font-size: 26px; }
+.stat-value { font-size: 26px; font-weight: 800; line-height: 1; }
+.stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+.stat-card.full .stat-value { font-size: 22px; }
+.stat-value.green { color: var(--green); }
+.stat-value.amber { color: var(--amber); }
+.stat-value.red { color: var(--red); }
+.stat-value.purple { color: var(--purple); }
+
 /* ===== PROGRESS BAR ===== */
-.progress-wrap { padding: 0 16px; }
 .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
 .progress-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
 .progress-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width .4s ease; }
-/* ===== ORDER TABLE ===== */
+
+/* ===== ORDER ROWS ===== */
 .order-list { display: flex; flex-direction: column; gap: 10px; }
 .order-row {
   background: var(--card);
@@ -88,110 +125,150 @@ input { font-family: inherit; }
   transition: border-color .3s;
 }
 .order-row.complete { border-color: var(--green); }
+.order-row.pending { border-color: var(--yellow); }
 .order-row-header {
-  padding: 12px 14px;
+  padding: 10px 14px;
   display: flex; align-items: center; gap: 10px;
   background: var(--card2);
   border-bottom: 1px solid var(--border);
 }
-.order-row.complete .order-row-header { background: rgba(34,197,94,.1); }
+.order-row.complete .order-row-header { background: rgba(34,197,94,.08); }
+.order-row.pending .order-row-header { background: rgba(234,179,8,.06); }
 .avatar {
-  width: 36px; height: 36px; border-radius: 50%;
+  width: 34px; height: 34px; border-radius: 50%;
   background: var(--amber-dim); color: var(--amber);
-  font-weight: 800; font-size: 15px;
+  font-weight: 800; font-size: 14px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .order-row.complete .avatar { background: var(--green-dim); color: var(--green); }
+.order-row.pending .avatar { background: var(--yellow-dim); color: var(--yellow); }
 .person-name { font-weight: 700; font-size: 15px; flex: 1; }
-.complete-badge { font-size: 11px; font-weight: 700; color: var(--green); background: var(--green-dim); padding: 2px 8px; border-radius: 20px; }
-.order-cells { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.status-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; }
+.badge-complete { color: var(--green); background: var(--green-dim); }
+.badge-pending { color: var(--yellow); background: var(--yellow-dim); }
+.btn-clear-order { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,.3); flex-shrink: 0; }
+
+/* order cells: 4 cols now (food, drink, extras, total) */
+.order-cells { display: grid; grid-template-columns: 1fr 1fr 1fr auto; }
 .order-cell {
-  padding: 10px 12px;
+  padding: 9px 11px;
   border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 3px;
+  display: flex; flex-direction: column; gap: 2px;
   cursor: pointer; transition: background .15s;
-  min-height: 64px;
-  position: relative;
+  min-height: 58px;
 }
+.order-cell.no-click { cursor: default; }
 .order-cell:last-child { border-right: none; }
-.order-cell:active { background: var(--card2); }
-.cell-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
-.cell-value { font-size: 13px; color: var(--text); line-height: 1.3; }
+.order-cell:not(.no-click):active { background: var(--card2); }
+.cell-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+.cell-value { font-size: 12px; color: var(--text); line-height: 1.3; }
 .cell-value.empty { color: var(--muted2); font-style: italic; }
 .cell-value.filled { color: var(--amber); font-weight: 600; }
+.cell-total { font-size: 13px; font-weight: 800; color: var(--green); }
+.cell-total-col { min-width: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 9px 11px; border-left: 1px solid var(--border); }
+
 /* ===== SUMMARY ===== */
-.summary-grid { display: flex; flex-direction: column; gap: 14px; }
-.summary-group { }
-.summary-group-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 8px; padding: 0 14px; }
-.summary-item { display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.summary-item { display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); gap: 10px; }
 .summary-item:last-child { border-bottom: none; }
 .summary-item-name { flex: 1; font-size: 14px; }
-.summary-badge { background: var(--amber); color: #000; font-size: 14px; font-weight: 800; min-width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; padding: 0 8px; }
-/* ===== EXPORT BUTTONS ===== */
+.summary-item-sub { font-size: 11px; color: var(--muted); }
+.summary-badge { background: var(--amber); color: #000; font-size: 13px; font-weight: 800; min-width: 30px; height: 30px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; padding: 0 7px; }
+.summary-total-badge { background: var(--green-dim); color: var(--green); font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-sm); }
+
+/* Financial summary */
+.fin-total-card { background: linear-gradient(135deg,rgba(168,85,247,.15),rgba(59,130,246,.1)); border: 1px solid var(--purple); border-radius: var(--radius); padding: 20px; text-align: center; }
+.fin-total-label { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.fin-total-amount { font-size: 36px; font-weight: 900; color: var(--purple); }
+
+/* ===== FIXED BOTTOM SUMMARY ===== */
+#quick-summary {
+  position: fixed; bottom: 54px; left: 0; right: 0; z-index: 40;
+  background: var(--card); border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#quick-summary.visible { display: flex; }
+.qs-item { display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; }
+.qs-name { font-size: 10px; color: var(--muted); white-space: nowrap; max-width: 72px; overflow: hidden; text-overflow: ellipsis; }
+.qs-count { font-size: 15px; font-weight: 800; color: var(--amber); }
+.qs-sep { width: 1px; height: 32px; background: var(--border); flex-shrink: 0; }
+.qs-total { font-size: 14px; font-weight: 800; color: var(--purple); white-space: nowrap; flex-shrink: 0; }
+
+/* ===== EXPORT ===== */
 .export-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 .btn-export { background: var(--card2); border: 1px solid var(--border); color: var(--text); font-size: 13px; font-weight: 700; padding: 14px 8px; border-radius: var(--radius-sm); display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .btn-export .exp-icon { font-size: 22px; }
+
 /* ===== MODAL / BOTTOM SHEET ===== */
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 100; display: none; align-items: flex-end; }
 .overlay.open { display: flex; }
-.sheet {
-  width: 100%; background: var(--card);
-  border-radius: 20px 20px 0 0;
-  max-height: 85vh; display: flex; flex-direction: column;
-  animation: slideUp .25s ease;
-}
+.sheet { width: 100%; background: var(--card); border-radius: 20px 20px 0 0; max-height: 85vh; display: flex; flex-direction: column; animation: slideUp .25s ease; }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .sheet-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 0; }
 .sheet-header { padding: 14px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
 .sheet-header h3 { font-size: 17px; font-weight: 700; flex: 1; }
 .sheet-close { font-size: 20px; background: none; color: var(--muted); }
 .sheet-body { overflow-y: auto; flex: 1; }
+
 /* ===== OPTION LIST ===== */
-.option-item {
-  padding: 15px 16px;
-  display: flex; align-items: center; gap: 12px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer; transition: background .1s;
-}
+.option-item { padding: 14px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s; }
 .option-item:active { background: var(--card2); }
 .option-check { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
-.option-check.radio { border-radius: 50%; }
 .option-check.checked { background: var(--amber); border-color: var(--amber); color: #000; font-size: 14px; font-weight: 900; }
-.option-label { font-size: 16px; flex: 1; }
+.option-label-wrap { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+.option-label { font-size: 16px; }
+.option-price { font-size: 12px; color: var(--green); font-weight: 700; }
 .option-none { color: var(--muted); font-style: italic; }
+
 /* ===== TOAST ===== */
-#toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; font-weight: 700; padding: 10px 20px; border-radius: 20px; font-size: 14px; z-index: 999; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
+#toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; font-weight: 700; padding: 10px 20px; border-radius: 20px; font-size: 14px; z-index: 999; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
 #toast.show { opacity: 1; }
+
 /* ===== CONFIRM DIALOG ===== */
-.confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; }
+.confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; }
 .confirm-overlay.open { display: flex; }
 .confirm-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 320px; width: 100%; }
 .confirm-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
 .confirm-box p { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
 .confirm-buttons { display: flex; gap: 10px; }
 .confirm-buttons button { flex: 1; padding: 13px; border-radius: var(--radius-sm); font-weight: 700; font-size: 15px; }
+
 /* ===== EMPTY STATE ===== */
 .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
 .empty-state .e-icon { font-size: 48px; margin-bottom: 12px; }
 .empty-state p { font-size: 15px; }
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
 /* ===== NAV TABS ===== */
 .tab-bar { display: flex; background: var(--card); border-top: 1px solid var(--border); position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
-.tab-btn { flex: 1; padding: 10px 4px 14px; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .3px; text-transform: uppercase; }
+.tab-btn { flex: 1; padding: 8px 4px 12px; display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .3px; text-transform: uppercase; }
 .tab-btn.active { color: var(--amber); }
-.tab-icon { font-size: 22px; }
-/* inline add participant btn */
-.btn-add-person { width: 100%; background: var(--card2); border: 1px dashed var(--border); color: var(--muted); font-size: 14px; font-weight: 600; padding: 12px; border-radius: var(--radius-sm); }
-.btn-add-person:active { border-color: var(--amber); color: var(--amber); }
+.tab-icon { font-size: 20px; }
+
+/* ===== TAB PANES ===== */
+.tab-pane { flex: 1; overflow-y: auto; display: none; flex-direction: column; }
+.tab-pane.active { display: flex; }
+
+/* input type number – hide arrows */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 </style>
 </head>
 <body>
 
-<!-- ======= SCREEN 1: SETUP ======= -->
+<!-- ============================================================
+     SCREEN 1: SETUP
+     ============================================================ -->
 <div id="screen-setup" class="screen active">
   <div class="header">
     <span class="header-icon">🍔</span>
@@ -199,7 +276,7 @@ input { font-family: inherit; }
     <span class="header-sub" id="setup-saved-label"></span>
   </div>
 
-  <div class="scroll-body" id="setup-scroll">
+  <div class="scroll-body">
 
     <!-- Participants -->
     <div class="section-card">
@@ -211,7 +288,7 @@ input { font-family: inherit; }
       <div class="chip-list" id="chips-people"></div>
       <div class="chip-input-row">
         <input type="text" id="input-person" placeholder="Nombre del participante…" autocomplete="off" autocorrect="off">
-        <button onclick="addItem('people')" aria-label="Agregar">+</button>
+        <button onclick="addPerson()" aria-label="Agregar">+</button>
       </div>
     </div>
 
@@ -222,10 +299,11 @@ input { font-family: inherit; }
         <h2>Comidas</h2>
         <span class="count" id="count-foods">0</span>
       </div>
-      <div class="chip-list" id="chips-foods"></div>
-      <div class="chip-input-row">
-        <input type="text" id="input-food" placeholder="Opción de comida…" autocomplete="off" autocorrect="off">
-        <button onclick="addItem('foods')" aria-label="Agregar">+</button>
+      <div class="product-list" id="list-foods"></div>
+      <div class="product-input-row">
+        <input type="text" id="input-food-name" placeholder="Nombre…" autocomplete="off">
+        <input type="number" id="input-food-price" placeholder="$0.00" min="0" step="0.01">
+        <button onclick="addProduct('foods')" aria-label="Agregar">+</button>
       </div>
     </div>
 
@@ -236,10 +314,11 @@ input { font-family: inherit; }
         <h2>Bebidas</h2>
         <span class="count" id="count-drinks">0</span>
       </div>
-      <div class="chip-list" id="chips-drinks"></div>
-      <div class="chip-input-row">
-        <input type="text" id="input-drink" placeholder="Opción de bebida…" autocomplete="off" autocorrect="off">
-        <button onclick="addItem('drinks')" aria-label="Agregar">+</button>
+      <div class="product-list" id="list-drinks"></div>
+      <div class="product-input-row">
+        <input type="text" id="input-drink-name" placeholder="Nombre…" autocomplete="off">
+        <input type="number" id="input-drink-price" placeholder="$0.00" min="0" step="0.01">
+        <button onclick="addProduct('drinks')" aria-label="Agregar">+</button>
       </div>
     </div>
 
@@ -250,10 +329,11 @@ input { font-family: inherit; }
         <h2>Extras</h2>
         <span class="count" id="count-extras">0</span>
       </div>
-      <div class="chip-list" id="chips-extras"></div>
-      <div class="chip-input-row">
-        <input type="text" id="input-extra" placeholder="Extra opcional…" autocomplete="off" autocorrect="off">
-        <button onclick="addItem('extras')" aria-label="Agregar">+</button>
+      <div class="product-list" id="list-extras"></div>
+      <div class="product-input-row">
+        <input type="text" id="input-extra-name" placeholder="Nombre…" autocomplete="off">
+        <input type="number" id="input-extra-price" placeholder="$0.00" min="0" step="0.01">
+        <button onclick="addProduct('extras')" aria-label="Agregar">+</button>
       </div>
     </div>
 
@@ -265,15 +345,17 @@ input { font-family: inherit; }
 </div>
 
 
-<!-- ======= SCREEN 2: ORDERS ======= -->
+<!-- ============================================================
+     SCREEN 2: ORDERS
+     ============================================================ -->
 <div id="screen-order" class="screen">
   <div class="header">
     <button class="btn-icon" onclick="goToSetup()" aria-label="Volver">←</button>
     <h1>Pedidos</h1>
-    <button class="btn-icon" onclick="addPersonDuringEvent()" aria-label="Agregar persona">+</button>
+    <button class="btn-icon" onclick="addPersonDuringEvent()" aria-label="Agregar persona" title="Agregar participante">+</button>
   </div>
 
-  <!-- Tab bar -->
+  <!-- NAV TABS -->
   <div class="tab-bar">
     <button class="tab-btn active" onclick="showTab('orders')" id="tab-orders">
       <span class="tab-icon">📋</span>Pedidos
@@ -286,42 +368,53 @@ input { font-family: inherit; }
     </button>
   </div>
 
-  <!-- TAB: Orders -->
-  <div id="tab-pane-orders" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;">
-    <div style="padding:12px 16px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center;">
-      <input type="text" id="search-input" placeholder="🔍  Buscar participante…" oninput="filterOrders()" style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:9px 16px;font-size:15px;color:var(--text);outline:none;">
+  <!-- QUICK SUMMARY BAR (fixed above tab bar) -->
+  <div id="quick-summary"></div>
+
+  <!-- TAB PANE: Orders -->
+  <div id="tab-pane-orders" class="tab-pane active">
+    <!-- Search -->
+    <div style="padding:12px 16px; background:var(--card); border-bottom:1px solid var(--border);">
+      <input type="text" id="search-input" placeholder="🔍  Buscar participante…" oninput="renderOrderList()"
+        style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:9px 16px;font-size:15px;color:var(--text);outline:none;">
     </div>
-    <div style="padding:12px 16px 4px;">
+    <!-- Stats bar -->
+    <div style="padding:12px 16px 8px;" id="stats-bar"></div>
+    <!-- Progress -->
+    <div style="padding:0 16px 10px;">
       <div class="progress-label">
         <span id="progress-text">0 de 0 pedidos completados</span>
         <span id="progress-pct">0%</span>
       </div>
       <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
     </div>
-    <div class="order-list" id="order-list" style="padding:10px 16px 100px;gap:10px;display:flex;flex-direction:column;"></div>
+    <!-- Order list -->
+    <div id="order-list" style="padding:0 16px 130px; display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 
-  <!-- TAB: Summary -->
-  <div id="tab-pane-summary" style="flex:1;overflow-y:auto;display:none;padding:16px;padding-bottom:100px;">
-    <div class="summary-grid" id="summary-content"></div>
+  <!-- TAB PANE: Summary -->
+  <div id="tab-pane-summary" class="tab-pane">
+    <div style="padding:16px; display:flex; flex-direction:column; gap:16px; padding-bottom:130px;" id="summary-content"></div>
   </div>
 
-  <!-- TAB: Export -->
-  <div id="tab-pane-export" style="flex:1;overflow-y:auto;display:none;padding:16px;display:none;flex-direction:column;gap:16px;padding-bottom:100px;">
-    <p style="font-size:14px;color:var(--muted);line-height:1.6;">Descarga los datos del evento en el formato que necesites para enviarlo al proveedor.</p>
-    <div class="export-row">
-      <button class="btn-export" onclick="exportCSV()"><span class="exp-icon">📄</span>CSV</button>
-      <button class="btn-export" onclick="exportExcel()"><span class="exp-icon">📊</span>Excel</button>
-      <button class="btn-export" onclick="exportSummary()"><span class="exp-icon">📋</span>Resumen</button>
-    </div>
-    <div style="margin-top:8px;">
-      <button class="btn-danger" style="width:100%;" onclick="confirmReset()">🗑️  Reiniciar evento</button>
+  <!-- TAB PANE: Export -->
+  <div id="tab-pane-export" class="tab-pane">
+    <div style="padding:16px; display:flex; flex-direction:column; gap:16px; padding-bottom:130px;">
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;">Descarga los datos del evento en el formato que necesites para enviarlo al proveedor.</p>
+      <div class="export-row">
+        <button class="btn-export" onclick="exportCSV()"><span class="exp-icon">📄</span>CSV</button>
+        <button class="btn-export" onclick="exportExcel()"><span class="exp-icon">📊</span>Excel</button>
+        <button class="btn-export" onclick="exportSummaryFile()"><span class="exp-icon">📋</span>Resumen</button>
+      </div>
+      <div style="margin-top:4px;">
+        <button class="btn-danger" style="width:100%;" onclick="confirmReset()">🗑️  Reiniciar todos los pedidos</button>
+      </div>
     </div>
   </div>
 </div>
 
 
-<!-- ======= MODAL: FOOD SELECTION ======= -->
+<!-- ===== MODAL: FOOD ===== -->
 <div class="overlay" id="overlay-food" onclick="closeModal('food')">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
@@ -333,7 +426,7 @@ input { font-family: inherit; }
   </div>
 </div>
 
-<!-- ======= MODAL: DRINK SELECTION ======= -->
+<!-- ===== MODAL: DRINK ===== -->
 <div class="overlay" id="overlay-drink" onclick="closeModal('drink')">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
@@ -345,8 +438,8 @@ input { font-family: inherit; }
   </div>
 </div>
 
-<!-- ======= MODAL: EXTRAS SELECTION ======= -->
-<div class="overlay" id="overlay-extra" onclick="closeModal('extra')">
+<!-- ===== MODAL: EXTRAS ===== -->
+<div class="overlay" id="overlay-extra" onclick="doneExtras()">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
     <div class="sheet-header">
@@ -357,49 +450,77 @@ input { font-family: inherit; }
   </div>
 </div>
 
-<!-- ======= CONFIRM DIALOG ======= -->
+<!-- ===== CONFIRM DIALOG ===== -->
 <div class="confirm-overlay" id="confirm-overlay">
   <div class="confirm-box">
     <h3 id="confirm-title">¿Estás seguro?</h3>
     <p id="confirm-message">Esta acción no se puede deshacer.</p>
     <div class="confirm-buttons">
       <button class="btn-secondary" onclick="closeConfirm()">Cancelar</button>
-      <button class="btn-danger" id="confirm-ok-btn" onclick="doConfirmAction()">Eliminar</button>
+      <button class="btn-danger" id="confirm-ok-btn" onclick="doConfirmAction()">Confirmar</button>
     </div>
   </div>
 </div>
 
-<!-- ======= TOAST ======= -->
+<!-- ===== TOAST ===== -->
 <div id="toast"></div>
 
 
 <script>
 /* ============================================================
    STATE
+   State uses objects for foods/drinks/extras: { nombre, precio }
+   People is still a string array.
+   Orders: { personName: { food: nombre|null, drink: nombre|null, extras: [nombre,...] } }
    ============================================================ */
 let state = {
   people: [],
-  foods: [],
-  drinks: [],
-  extras: [],
-  orders: {}   // { personName: { food: str|null, drink: str|null, extras: [] } }
+  foods:  [],   // [{ nombre, precio }]
+  drinks: [],   // [{ nombre, precio }]
+  extras: [],   // [{ nombre, precio }]
+  orders: {}    // { personName: { food, drink, extras[] } }
 };
 
-let currentModal = null;    // { type:'food'|'drink'|'extra', person: name }
 let confirmCallback = null;
 let activeTab = 'orders';
 
 /* ============================================================
    PERSISTENCE
    ============================================================ */
+const STORAGE_KEY = 'foodorder_v3';
+
 function save() {
-  try { localStorage.setItem('foodorder_v2', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) { console.warn('LocalStorage error', e); }
 }
+
 function load() {
   try {
-    const raw = localStorage.getItem('foodorder_v2');
-    if (raw) state = { ...state, ...JSON.parse(raw) };
-  } catch(e) {}
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      // Migrate from v2 if exists
+      const old = localStorage.getItem('foodorder_v2');
+      if (old) migrateFromV2(JSON.parse(old));
+      return;
+    }
+    const parsed = JSON.parse(raw);
+    state = { ...state, ...parsed };
+    // Ensure product arrays are objects (guard against corrupt data)
+    ['foods','drinks','extras'].forEach(cat => {
+      state[cat] = (state[cat] || []).map(item =>
+        typeof item === 'string' ? { nombre: item, precio: 0 } : item
+      );
+    });
+  } catch(e) { console.warn('Load error', e); }
+}
+
+/* Migrate old string arrays to {nombre, precio} objects */
+function migrateFromV2(old) {
+  state.people = old.people || [];
+  ['foods','drinks','extras'].forEach(cat => {
+    state[cat] = (old[cat] || []).map(s => ({ nombre: s, precio: 0 }));
+  });
+  state.orders = old.orders || {};
+  save();
 }
 
 /* ============================================================
@@ -409,96 +530,200 @@ document.addEventListener('DOMContentLoaded', () => {
   load();
   renderSetup();
 
-  // Enter key support
-  ['person','food','drink','extra'].forEach(k => {
-    const map = { person:'people', food:'foods', drink:'drinks', extra:'extras' };
-    const el = document.getElementById('input-' + k);
-    if (el) el.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); addItem(map[k]); }});
+  // Enter key on person input
+  document.getElementById('input-person').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); addPerson(); }
+  });
+  // Enter on product inputs
+  ['food','drink','extra'].forEach(k => {
+    const cat = k === 'food' ? 'foods' : k === 'drink' ? 'drinks' : 'extras';
+    document.getElementById(`input-${k}-name`).addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); addProduct(cat); }
+    });
+    document.getElementById(`input-${k}-price`).addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); addProduct(cat); }
+    });
   });
 });
 
 /* ============================================================
-   SETUP SCREEN
+   HELPERS
    ============================================================ */
-function renderSetup() {
-  ['people','foods','drinks','extras'].forEach(renderChips);
-  document.getElementById('setup-saved-label').textContent = state.people.length ? 'datos guardados ✓' : '';
+const fmt = n => '$' + Number(n || 0).toFixed(2);
+
+function getProduct(category, nombre) {
+  return state[category].find(p => p.nombre === nombre) || null;
 }
 
-function renderChips(category) {
-  const container = document.getElementById('chips-' + category);
-  const count = document.getElementById('count-' + category);
-  if (!container) return;
-  const items = state[category];
-  count.textContent = items.length;
-  container.innerHTML = items.length ? '' : '<span style="color:var(--muted);font-size:13px;padding:4px 2px;">Sin opciones aún</span>';
-  items.forEach((item, i) => {
-    const chip = document.createElement('div');
-    chip.className = 'chip';
-    chip.innerHTML = `<span>${item}</span><button class="chip-del" onclick="removeItem('${category}',${i})" aria-label="Eliminar ${item}">✕</button>`;
-    chip.querySelector('span').ondblclick = () => editItem(category, i);
-    container.appendChild(chip);
-  });
+function calcOrderTotal(order) {
+  if (!order) return 0;
+  let total = 0;
+  if (order.food) { const p = getProduct('foods', order.food); if (p) total += +p.precio; }
+  if (order.drink) { const p = getProduct('drinks', order.drink); if (p) total += +p.precio; }
+  (order.extras || []).forEach(ex => { const p = getProduct('extras', ex); if (p) total += +p.precio; });
+  return total;
 }
 
-function addItem(category) {
-  const map = { people:'person', foods:'food', drinks:'drink', extras:'extra' };
-  const input = document.getElementById('input-' + map[category]);
-  const val = input.value.trim();
-  if (!val) return;
-  if (state[category].includes(val)) { showToast('Ya existe "' + val + '"'); return; }
-  state[category].push(val);
-  input.value = '';
-  save();
-  renderChips(category);
-  // Auto-initialize order slot for new person
-  if (category === 'people') initOrderSlot(val);
-}
-
-function removeItem(category, idx) {
-  const item = state[category][idx];
-  showConfirm('Eliminar "' + item + '"', '¿Confirmas que deseas eliminar esta opción?', 'Eliminar', () => {
-    state[category].splice(idx, 1);
-    save();
-    renderChips(category);
-  });
-}
-
-function editItem(category, idx) {
-  const current = state[category][idx];
-  const val = prompt('Editar:', current);
-  if (!val || val.trim() === current) return;
-  if (state[category].includes(val.trim())) { showToast('Ya existe "' + val.trim() + '"'); return; }
-  // update orders if food/drink/extra name changed
-  const newVal = val.trim();
-  if (category === 'foods') {
-    Object.values(state.orders).forEach(o => { if(o.food===current) o.food=newVal; });
-  } else if (category === 'drinks') {
-    Object.values(state.orders).forEach(o => { if(o.drink===current) o.drink=newVal; });
-  } else if (category === 'extras') {
-    Object.values(state.orders).forEach(o => { o.extras=o.extras.map(x=>x===current?newVal:x); });
-  } else if (category === 'people') {
-    if (state.orders[current]) { state.orders[newVal]=state.orders[current]; delete state.orders[current]; }
-  }
-  state[category][idx] = newVal;
-  save();
-  renderChips(category);
+function isComplete(person) {
+  const o = state.orders[person];
+  return o && o.food && o.drink;
 }
 
 function initOrderSlot(name) {
   if (!state.orders[name]) state.orders[name] = { food: null, drink: null, extras: [] };
 }
 
+/* ============================================================
+   SETUP SCREEN
+   ============================================================ */
+function renderSetup() {
+  renderPeopleChips();
+  ['foods','drinks','extras'].forEach(renderProductList);
+  const lbl = document.getElementById('setup-saved-label');
+  if (lbl) lbl.textContent = state.people.length ? 'datos guardados ✓' : '';
+}
+
+/* People chips */
+function renderPeopleChips() {
+  const container = document.getElementById('chips-people');
+  const count = document.getElementById('count-people');
+  if (!container) return;
+  const items = state.people;
+  count.textContent = items.length;
+  container.innerHTML = items.length ? '' : '<span style="color:var(--muted);font-size:13px;padding:4px 2px;">Sin participantes aún</span>';
+  items.forEach((name, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.innerHTML = `<span>${escHtml(name)}</span>
+      <button class="chip-del" onclick="removePerson(${i})" aria-label="Eliminar">✕</button>`;
+    chip.querySelector('span').ondblclick = () => editPerson(i);
+    container.appendChild(chip);
+  });
+}
+
+function addPerson() {
+  const input = document.getElementById('input-person');
+  const val = input.value.trim();
+  if (!val) return;
+  if (state.people.includes(val)) { showToast('Ya existe "' + val + '"'); return; }
+  state.people.push(val);
+  initOrderSlot(val);
+  input.value = '';
+  save();
+  renderPeopleChips();
+  document.getElementById('setup-saved-label').textContent = 'datos guardados ✓';
+}
+
+function removePerson(idx) {
+  const name = state.people[idx];
+  showConfirm('Eliminar "' + name + '"', 'Se eliminará esta persona y su pedido.', 'Eliminar', () => {
+    state.people.splice(idx, 1);
+    delete state.orders[name];
+    save();
+    renderPeopleChips();
+  });
+}
+
+function editPerson(idx) {
+  const current = state.people[idx];
+  const val = prompt('Editar nombre:', current);
+  if (!val || val.trim() === current) return;
+  const newName = val.trim();
+  if (state.people.includes(newName)) { showToast('Ya existe "' + newName + '"'); return; }
+  // Move order slot
+  if (state.orders[current]) { state.orders[newName] = state.orders[current]; delete state.orders[current]; }
+  state.people[idx] = newName;
+  save();
+  renderPeopleChips();
+}
+
+/* Product lists (foods, drinks, extras) */
+function renderProductList(category) {
+  const container = document.getElementById('list-' + category);
+  const count = document.getElementById('count-' + category);
+  if (!container) return;
+  const items = state[category];
+  count.textContent = items.length;
+  container.innerHTML = '';
+  if (!items.length) {
+    container.innerHTML = '<div style="padding:12px 14px;color:var(--muted);font-size:13px;">Sin opciones aún</div>';
+    return;
+  }
+  items.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'product-row';
+    row.innerHTML = `
+      <span class="product-name">${escHtml(item.nombre)}</span>
+      <span class="product-price">${fmt(item.precio)}</span>
+      <button class="product-del" onclick="removeProduct('${category}',${i})" aria-label="Eliminar">✕</button>`;
+    row.querySelector('.product-name').ondblclick = () => editProduct(category, i);
+    row.querySelector('.product-price').ondblclick = () => editProduct(category, i);
+    container.appendChild(row);
+  });
+}
+
+function addProduct(category) {
+  const keyMap = { foods:'food', drinks:'drink', extras:'extra' };
+  const k = keyMap[category];
+  const nameInput = document.getElementById(`input-${k}-name`);
+  const priceInput = document.getElementById(`input-${k}-price`);
+  const nombre = nameInput.value.trim();
+  const precio = parseFloat(priceInput.value) || 0;
+  if (!nombre) { showToast('Escribe un nombre'); return; }
+  if (state[category].some(p => p.nombre === nombre)) { showToast('Ya existe "' + nombre + '"'); return; }
+  state[category].push({ nombre, precio });
+  nameInput.value = '';
+  priceInput.value = '';
+  nameInput.focus();
+  save();
+  renderProductList(category);
+}
+
+function removeProduct(category, idx) {
+  const item = state[category][idx];
+  showConfirm('Eliminar "' + item.nombre + '"', '¿Confirmas que deseas eliminar esta opción?', 'Eliminar', () => {
+    // Clear this product from existing orders
+    const nombre = item.nombre;
+    Object.values(state.orders).forEach(o => {
+      if (category === 'foods' && o.food === nombre) o.food = null;
+      if (category === 'drinks' && o.drink === nombre) o.drink = null;
+      if (category === 'extras') o.extras = (o.extras || []).filter(x => x !== nombre);
+    });
+    state[category].splice(idx, 1);
+    save();
+    renderProductList(category);
+  });
+}
+
+function editProduct(category, idx) {
+  const item = state[category][idx];
+  const newName = prompt('Nombre:', item.nombre);
+  if (newName === null) return;
+  const newPriceStr = prompt('Precio ($):', item.precio.toFixed(2));
+  if (newPriceStr === null) return;
+  const newNombre = newName.trim() || item.nombre;
+  const newPrecio = parseFloat(newPriceStr) || 0;
+  // Update orders referencing old name
+  if (newNombre !== item.nombre) {
+    Object.values(state.orders).forEach(o => {
+      if (category === 'foods' && o.food === item.nombre) o.food = newNombre;
+      if (category === 'drinks' && o.drink === item.nombre) o.drink = newNombre;
+      if (category === 'extras') o.extras = (o.extras||[]).map(x => x === item.nombre ? newNombre : x);
+    });
+  }
+  state[category][idx] = { nombre: newNombre, precio: newPrecio };
+  save();
+  renderProductList(category);
+}
+
 function startOrdering() {
   if (state.people.length === 0) { showToast('Agrega al menos un participante'); return; }
-  if (state.foods.length === 0) { showToast('Agrega al menos una comida'); return; }
-  // ensure all slots exist
+  if (state.foods.length === 0)  { showToast('Agrega al menos una comida'); return; }
   state.people.forEach(initOrderSlot);
   save();
   document.getElementById('screen-setup').classList.remove('active');
   document.getElementById('screen-order').classList.add('active');
   showTab('orders');
-  renderOrderList();
 }
 
 function goToSetup() {
@@ -508,79 +733,124 @@ function goToSetup() {
 }
 
 /* ============================================================
-   ORDER SCREEN TABS
+   ORDER SCREEN – TABS
    ============================================================ */
 function showTab(tab) {
   activeTab = tab;
   ['orders','summary','export'].forEach(t => {
-    document.getElementById('tab-' + t).classList.toggle('active', t===tab);
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
     const pane = document.getElementById('tab-pane-' + t);
-    pane.style.display = (t===tab) ? (t==='export'?'flex':'block') : 'none';
-    if (t===tab && t==='export') pane.style.flexDirection='column';
+    pane.classList.toggle('active', t === tab);
   });
-  if (tab==='summary') renderSummary();
-  if (tab==='orders') renderOrderList();
+  const qs = document.getElementById('quick-summary');
+  if (tab === 'orders') { qs.classList.add('visible'); renderOrderList(); renderQuickSummary(); }
+  else { qs.classList.remove('visible'); }
+  if (tab === 'summary') renderSummary();
 }
 
 /* ============================================================
    ORDER LIST
    ============================================================ */
 function renderOrderList() {
-  const query = (document.getElementById('search-input')||{}).value || '';
+  const query = (document.getElementById('search-input') || {}).value || '';
   const list = document.getElementById('order-list');
-  const filtered = state.people.filter(p => p.toLowerCase().includes(query.toLowerCase()));
 
-  // Progress
+  // --- Stats ---
   const total = state.people.length;
   const done = state.people.filter(p => isComplete(p)).length;
-  document.getElementById('progress-text').textContent = `${done} de ${total} pedidos completados`;
-  document.getElementById('progress-pct').textContent = total ? Math.round(done/total*100)+'%' : '0%';
-  document.getElementById('progress-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  const pending = total - done;
+  const grandTotal = state.people.reduce((s, p) => s + calcOrderTotal(state.orders[p]), 0);
 
+  document.getElementById('progress-text').textContent = `${done} de ${total} pedidos completados`;
+  document.getElementById('progress-pct').textContent = total ? Math.round(done / total * 100) + '%' : '0%';
+  document.getElementById('progress-fill').style.width = total ? (done / total * 100) + '%' : '0%';
+
+  // Stats bar
+  const sb = document.getElementById('stats-bar');
+  sb.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value green">${done}</span>
+        <span class="stat-label">🟢 Completos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value red">${pending}</span>
+        <span class="stat-label">🟡 Pendientes</span>
+      </div>
+      <div class="stat-card full">
+        <span class="stat-icon">💰</span>
+        <div>
+          <div class="stat-value purple">${fmt(grandTotal)}</div>
+          <div class="stat-label">Monto total esperado</div>
+        </div>
+      </div>
+    </div>`;
+
+  // Quick summary bar
+  renderQuickSummary();
+
+  // Filter
+  const filtered = state.people.filter(p => p.toLowerCase().includes(query.toLowerCase()));
   if (filtered.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="e-icon">🔍</div><p>No se encontró "${query}"</p></div>`;
+    list.innerHTML = `<div class="empty-state"><div class="e-icon">🔍</div><p>No se encontró "${escHtml(query)}"</p></div>`;
     return;
   }
+
   list.innerHTML = '';
   filtered.forEach(person => {
-    const order = state.orders[person] || { food:null, drink:null, extras:[] };
+    const order = state.orders[person] || { food: null, drink: null, extras: [] };
     const complete = isComplete(person);
+    const hasSome = order.food || order.drink || (order.extras && order.extras.length > 0);
     const extrasText = order.extras && order.extras.length ? order.extras.join(', ') : null;
+    const orderTotal = calcOrderTotal(order);
+
+    const rowClass = complete ? 'complete' : hasSome ? 'pending' : '';
+    const badgeHtml = complete
+      ? '<span class="status-badge badge-complete">🟢 Listo</span>'
+      : hasSome
+      ? '<span class="status-badge badge-pending">🟡 Pendiente</span>'
+      : '';
 
     const row = document.createElement('div');
-    row.className = 'order-row' + (complete ? ' complete' : '');
+    row.className = `order-row ${rowClass}`;
     row.innerHTML = `
       <div class="order-row-header">
         <div class="avatar">${person[0].toUpperCase()}</div>
-        <span class="person-name">${person}</span>
-        ${complete ? '<span class="complete-badge">✓ Listo</span>' : ''}
+        <span class="person-name">${escHtml(person)}</span>
+        ${badgeHtml}
+        ${hasSome ? `<button class="btn-clear-order" onclick="clearOrder('${escAttr(person)}')">Limpiar</button>` : ''}
       </div>
       <div class="order-cells">
-        <div class="order-cell" onclick="openModal('food','${escapeName(person)}')">
+        <div class="order-cell" onclick="openModal('food','${escAttr(person)}')">
           <span class="cell-label">🍽 Comida</span>
-          <span class="cell-value ${order.food?'filled':'empty'}">${order.food || 'Seleccionar…'}</span>
+          <span class="cell-value ${order.food ? 'filled' : 'empty'}">${order.food ? escHtml(order.food) : 'Seleccionar…'}</span>
         </div>
-        <div class="order-cell" onclick="openModal('drink','${escapeName(person)}')">
+        <div class="order-cell" onclick="openModal('drink','${escAttr(person)}')">
           <span class="cell-label">🥤 Bebida</span>
-          <span class="cell-value ${order.drink?'filled':'empty'}">${order.drink || 'Seleccionar…'}</span>
+          <span class="cell-value ${order.drink ? 'filled' : 'empty'}">${order.drink ? escHtml(order.drink) : 'Seleccionar…'}</span>
         </div>
-        <div class="order-cell" onclick="openModal('extra','${escapeName(person)}')">
+        <div class="order-cell" onclick="openModal('extra','${escAttr(person)}')">
           <span class="cell-label">⭐ Extras</span>
-          <span class="cell-value ${extrasText?'filled':'empty'}">${extrasText || 'Ninguno'}</span>
+          <span class="cell-value ${extrasText ? 'filled' : 'empty'}">${extrasText ? escHtml(extrasText) : 'Ninguno'}</span>
+        </div>
+        <div class="cell-total-col no-click">
+          <span class="cell-label">Total</span>
+          <span class="cell-total">${fmt(orderTotal)}</span>
         </div>
       </div>`;
     list.appendChild(row);
   });
 }
 
-function escapeName(n) { return n.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
-
-function isComplete(person) {
-  const o = state.orders[person];
-  return o && o.food;  // food is the minimum requirement
+/* Clear a single person's order (with confirmation) */
+function clearOrder(person) {
+  showConfirm('¿Limpiar pedido?', `Se borrarán comida, bebida y extras de ${person}.`, 'Confirmar', () => {
+    state.orders[person] = { food: null, drink: null, extras: [] };
+    save();
+    renderOrderList();
+    showToast('✓ Pedido de ' + person + ' limpiado');
+  });
 }
-
-function filterOrders() { renderOrderList(); }
 
 function addPersonDuringEvent() {
   const name = prompt('Nombre del nuevo participante:');
@@ -595,240 +865,394 @@ function addPersonDuringEvent() {
 }
 
 /* ============================================================
+   QUICK SUMMARY BAR
+   ============================================================ */
+function renderQuickSummary() {
+  const qs = document.getElementById('quick-summary');
+  if (!qs) return;
+  const counts = {};
+  // Collect all selections
+  state.people.forEach(p => {
+    const o = state.orders[p];
+    if (!o) return;
+    if (o.food) counts[o.food] = (counts[o.food] || 0) + 1;
+    if (o.drink) counts[o.drink] = (counts[o.drink] || 0) + 1;
+    (o.extras || []).forEach(ex => { counts[ex] = (counts[ex] || 0) + 1; });
+  });
+  const grandTotal = state.people.reduce((s, p) => s + calcOrderTotal(state.orders[p]), 0);
+
+  qs.innerHTML = '';
+  const entries = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  if (!entries.length) {
+    qs.innerHTML = '<span style="color:var(--muted);font-size:13px;">Sin pedidos aún</span>';
+    return;
+  }
+  entries.forEach(([name, cnt], i) => {
+    const item = document.createElement('div');
+    item.className = 'qs-item';
+    item.innerHTML = `<span class="qs-count">${cnt}</span><span class="qs-name">${escHtml(name)}</span>`;
+    qs.appendChild(item);
+    if (i < entries.length - 1) {
+      const sep = document.createElement('div'); sep.className = 'qs-sep';
+      qs.appendChild(sep);
+    }
+  });
+  const sep = document.createElement('div'); sep.className = 'qs-sep';
+  qs.appendChild(sep);
+  const totalEl = document.createElement('div');
+  totalEl.className = 'qs-total';
+  totalEl.textContent = fmt(grandTotal);
+  qs.appendChild(totalEl);
+}
+
+/* ============================================================
    MODALS
    ============================================================ */
 function openModal(type, person) {
-  currentModal = { type, person };
-  const order = state.orders[person] || { food:null, drink:null, extras:[] };
+  // Ensure order slot exists
+  if (!state.orders[person]) initOrderSlot(person);
+  const order = state.orders[person];
 
   if (type === 'food') {
-    document.getElementById('modal-food-title').textContent = '🍽 Comida – ' + person;
+    document.getElementById('modal-food-title').textContent = '🍽 Comida — ' + person;
     const body = document.getElementById('modal-food-options');
     body.innerHTML = '';
-    // None option
-    body.appendChild(createOptionItem('Sin comida', order.food === null, true, () => {
-      state.orders[person].food = null; save(); renderOrderList(); closeModal('food');
+    body.appendChild(makeOptionItem('Sin comida', !order.food, true, () => {
+      state.orders[person].food = null; save(); closeModal('food');
     }));
-    state.foods.forEach(f => {
-      body.appendChild(createOptionItem(f, order.food === f, true, () => {
-        state.orders[person].food = f; save(); renderOrderList(); closeModal('food');
-      }));
+    state.foods.forEach(prod => {
+      body.appendChild(makeOptionItem(prod.nombre, order.food === prod.nombre, true, () => {
+        state.orders[person].food = prod.nombre; save(); closeModal('food');
+      }, fmt(prod.precio)));
     });
     document.getElementById('overlay-food').classList.add('open');
+
   } else if (type === 'drink') {
-    document.getElementById('modal-drink-title').textContent = '🥤 Bebida – ' + person;
+    document.getElementById('modal-drink-title').textContent = '🥤 Bebida — ' + person;
     const body = document.getElementById('modal-drink-options');
     body.innerHTML = '';
-    body.appendChild(createOptionItem('Sin bebida', order.drink === null, true, () => {
-      state.orders[person].drink = null; save(); renderOrderList(); closeModal('drink');
+    body.appendChild(makeOptionItem('Sin bebida', !order.drink, true, () => {
+      state.orders[person].drink = null; save(); closeModal('drink');
     }));
-    state.drinks.forEach(d => {
-      body.appendChild(createOptionItem(d, order.drink === d, true, () => {
-        state.orders[person].drink = d; save(); renderOrderList(); closeModal('drink');
-      }));
+    state.drinks.forEach(prod => {
+      body.appendChild(makeOptionItem(prod.nombre, order.drink === prod.nombre, true, () => {
+        state.orders[person].drink = prod.nombre; save(); closeModal('drink');
+      }, fmt(prod.precio)));
     });
     document.getElementById('overlay-drink').classList.add('open');
+
   } else if (type === 'extra') {
-    document.getElementById('modal-extra-title').textContent = '⭐ Extras – ' + person;
+    document.getElementById('modal-extra-title').textContent = '⭐ Extras — ' + person;
     renderExtraOptions(person);
     document.getElementById('overlay-extra').classList.add('open');
   }
 }
 
 function renderExtraOptions(person) {
-  const order = state.orders[person] || { extras:[] };
+  const order = state.orders[person] || { extras: [] };
   const body = document.getElementById('modal-extra-options');
   body.innerHTML = '';
-  if (state.extras.length === 0) {
+  if (!state.extras.length) {
     body.innerHTML = '<div class="empty-state"><div class="e-icon">⭐</div><p>No hay extras configurados</p></div>';
     return;
   }
-  state.extras.forEach(ex => {
-    const checked = order.extras && order.extras.includes(ex);
-    const item = createOptionItem(ex, checked, false, () => {
+  state.extras.forEach(prod => {
+    const checked = (order.extras || []).includes(prod.nombre);
+    const el = makeOptionItem(prod.nombre, checked, false, () => {
       const extras = state.orders[person].extras || [];
-      if (extras.includes(ex)) state.orders[person].extras = extras.filter(x=>x!==ex);
-      else state.orders[person].extras = [...extras, ex];
+      if (extras.includes(prod.nombre)) {
+        state.orders[person].extras = extras.filter(x => x !== prod.nombre);
+      } else {
+        state.orders[person].extras = [...extras, prod.nombre];
+      }
       save();
-      renderExtraOptions(person); // re-render checkboxes
-    });
-    body.appendChild(item);
+      renderExtraOptions(person); // re-render to toggle checkboxes
+    }, fmt(prod.precio));
+    body.appendChild(el);
   });
 }
 
-function createOptionItem(label, checked, isRadio, onClick) {
+function makeOptionItem(label, checked, isRadio, onClick, priceLabel) {
   const div = document.createElement('div');
   div.className = 'option-item';
-  const check = document.createElement('div');
-  check.className = 'option-check' + (isRadio?' radio':'') + (checked?' checked':'');
-  check.innerHTML = checked ? '✓' : '';
-  const span = document.createElement('span');
-  span.className = 'option-label' + (label.startsWith('Sin') ? ' option-none' : '');
-  span.textContent = label;
-  div.appendChild(check);
-  div.appendChild(span);
+  const checkEl = document.createElement('div');
+  checkEl.className = 'option-check' + (checked ? ' checked' : '');
+  checkEl.innerHTML = checked ? '✓' : '';
+  const labelWrap = document.createElement('div');
+  labelWrap.className = 'option-label-wrap';
+  const lbl = document.createElement('span');
+  lbl.className = 'option-label' + (label.startsWith('Sin') ? ' option-none' : '');
+  lbl.textContent = label;
+  labelWrap.appendChild(lbl);
+  if (priceLabel && !label.startsWith('Sin')) {
+    const p = document.createElement('span');
+    p.className = 'option-price';
+    p.textContent = priceLabel;
+    labelWrap.appendChild(p);
+  }
+  div.appendChild(checkEl);
+  div.appendChild(labelWrap);
   div.addEventListener('click', onClick);
   return div;
 }
 
 function closeModal(type) {
   document.getElementById('overlay-' + type).classList.remove('open');
-  if (activeTab==='orders') renderOrderList();
+  renderOrderList();
 }
 
 function doneExtras() {
-  closeModal('extra');
+  document.getElementById('overlay-extra').classList.remove('open');
+  renderOrderList();
 }
 
 /* ============================================================
-   SUMMARY
+   SUMMARY TAB
    ============================================================ */
 function renderSummary() {
-  const foodCounts = {}, drinkCounts = {}, extraCounts = {};
-  state.foods.forEach(f => foodCounts[f] = 0);
-  state.drinks.forEach(d => drinkCounts[d] = 0);
-  state.extras.forEach(e => extraCounts[e] = 0);
-
-  Object.values(state.orders).forEach(o => {
-    if (o.food && foodCounts[o.food] !== undefined) foodCounts[o.food]++;
-    if (o.drink && drinkCounts[o.drink] !== undefined) drinkCounts[o.drink]++;
-    (o.extras||[]).forEach(e => { if(extraCounts[e]!==undefined) extraCounts[e]++; });
-  });
-
   const container = document.getElementById('summary-content');
   container.innerHTML = '';
 
-  const makeGroup = (title, counts, icon) => {
-    const entries = Object.entries(counts).filter(([,c]) => c > 0);
-    const group = document.createElement('div');
-    group.className = 'section-card';
-    group.innerHTML = `<div class="section-header"><span class="icon">${icon}</span><h2>${title}</h2></div>`;
-    if (entries.length === 0) {
-      group.innerHTML += '<div style="padding:16px;color:var(--muted);font-size:14px;">Sin pedidos aún</div>';
+  // Build counts + revenue
+  const foodStats = {}, drinkStats = {}, extraStats = {};
+  state.foods.forEach(p => foodStats[p.nombre] = { count: 0, precio: p.precio });
+  state.drinks.forEach(p => drinkStats[p.nombre] = { count: 0, precio: p.precio });
+  state.extras.forEach(p => extraStats[p.nombre] = { count: 0, precio: p.precio });
+
+  let grandTotal = 0;
+  state.people.forEach(person => {
+    const o = state.orders[person];
+    if (!o) return;
+    if (o.food && foodStats[o.food] !== undefined) foodStats[o.food].count++;
+    if (o.drink && drinkStats[o.drink] !== undefined) drinkStats[o.drink].count++;
+    (o.extras || []).forEach(ex => { if (extraStats[ex] !== undefined) extraStats[ex].count++; });
+    grandTotal += calcOrderTotal(o);
+  });
+
+  /* Financial total card */
+  const finCard = document.createElement('div');
+  finCard.className = 'fin-total-card';
+  finCard.innerHTML = `<div class="fin-total-label">💰 Ingreso total esperado</div>
+    <div class="fin-total-amount">${fmt(grandTotal)}</div>`;
+  container.appendChild(finCard);
+
+  /* Stats summary */
+  const total = state.people.length;
+  const done = state.people.filter(p => isComplete(p)).length;
+  const statsCard = document.createElement('div');
+  statsCard.className = 'section-card';
+  statsCard.innerHTML = `
+    <div class="section-header"><span class="icon">📈</span><h2>Estadísticas</h2></div>
+    <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
+      <div><div style="font-size:22px;font-weight:800;color:var(--text)">${total}</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Participantes</div></div>
+      <div><div style="font-size:22px;font-weight:800;color:var(--green)">${done}</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Completos</div></div>
+      <div><div style="font-size:22px;font-weight:800;color:var(--red)">${total-done}</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Pendientes</div></div>
+    </div>`;
+  container.appendChild(statsCard);
+
+  /* Product groups */
+  const makeGroup = (title, stats, icon) => {
+    const entries = Object.entries(stats).filter(([, s]) => s.count > 0);
+    const card = document.createElement('div');
+    card.className = 'section-card';
+    const totalRev = entries.reduce((s, [, v]) => s + v.count * v.precio, 0);
+    card.innerHTML = `<div class="section-header"><span class="icon">${icon}</span><h2>${title}</h2>${totalRev > 0 ? `<span class="count">${fmt(totalRev)}</span>` : ''}</div>`;
+    if (!entries.length) {
+      card.innerHTML += '<div style="padding:14px;color:var(--muted);font-size:14px;">Sin pedidos aún</div>';
     } else {
-      entries.sort((a,b)=>b[1]-a[1]).forEach(([name, count]) => {
-        group.innerHTML += `<div class="summary-item"><span class="summary-item-name">${name}</span><span class="summary-badge">${count}</span></div>`;
+      entries.sort((a,b) => b[1].count - a[1].count).forEach(([nombre, s]) => {
+        const rev = s.count * s.precio;
+        card.innerHTML += `
+          <div class="summary-item">
+            <div class="option-label-wrap">
+              <span class="summary-item-name">${escHtml(nombre)}</span>
+              <span class="summary-item-sub">${fmt(s.precio)} × ${s.count} = ${fmt(rev)}</span>
+            </div>
+            <span class="summary-badge">${s.count}</span>
+          </div>`;
       });
     }
-    return group;
+    return card;
   };
 
-  container.appendChild(makeGroup('Comidas', foodCounts, '🍽️'));
-  container.appendChild(makeGroup('Bebidas', drinkCounts, '🥤'));
-  if (state.extras.length > 0) container.appendChild(makeGroup('Extras', extraCounts, '⭐'));
+  container.appendChild(makeGroup('Comidas', foodStats, '🍽️'));
+  container.appendChild(makeGroup('Bebidas', drinkStats, '🥤'));
+  if (state.extras.length) container.appendChild(makeGroup('Extras', extraStats, '⭐'));
+
+  /* Per-person breakdown */
+  const ppCard = document.createElement('div');
+  ppCard.className = 'section-card';
+  ppCard.innerHTML = `<div class="section-header"><span class="icon">👥</span><h2>Por participante</h2></div>`;
+  state.people.forEach(person => {
+    const o = state.orders[person] || {};
+    const t = calcOrderTotal(o);
+    const extrasStr = (o.extras || []).join(', ') || '—';
+    ppCard.innerHTML += `
+      <div class="summary-item">
+        <div class="option-label-wrap" style="flex:1">
+          <span class="summary-item-name">${escHtml(person)}</span>
+          <span class="summary-item-sub">${o.food || '—'} · ${o.drink || '—'} · ${extrasStr}</span>
+        </div>
+        <span class="summary-total-badge">${fmt(t)}</span>
+      </div>`;
+  });
+  container.appendChild(ppCard);
 }
 
 /* ============================================================
    EXPORT
    ============================================================ */
 function exportCSV() {
-  let csv = 'Nombre,Comida,Bebida,Extras\n';
+  let csv = 'Nombre,Comida,Bebida,Extras,Total\n';
   state.people.forEach(p => {
     const o = state.orders[p] || {};
-    const extras = (o.extras||[]).join(' | ');
-    csv += `"${p}","${o.food||''}","${o.drink||''}","${extras}"\n`;
+    const extras = (o.extras || []).join(' | ');
+    const total = calcOrderTotal(o).toFixed(2);
+    csv += `"${p}","${o.food || ''}","${o.drink || ''}","${extras}","${total}"\n`;
+  });
+  // Append summary
+  csv += '\n\nRESUMEN\nProducto,Cantidad,Total\n';
+  const all = [...state.foods, ...state.drinks, ...state.extras];
+  all.forEach(prod => {
+    let count = 0;
+    state.people.forEach(p => {
+      const o = state.orders[p] || {};
+      if (o.food === prod.nombre) count++;
+      if (o.drink === prod.nombre) count++;
+      if ((o.extras||[]).includes(prod.nombre)) count++;
+    });
+    if (count > 0) csv += `"${prod.nombre}",${count},"${(count * prod.precio).toFixed(2)}"\n`;
   });
   download(csv, 'pedidos.csv', 'text/csv');
   showToast('✓ CSV descargado');
 }
 
 function exportExcel() {
-  // Build a minimal XLSX using XML (Office Open XML)
-  const rows = [['Nombre','Comida','Bebida','Extras'], ...state.people.map(p => {
-    const o = state.orders[p]||{};
-    return [p, o.food||'', o.drink||'', (o.extras||[]).join(', ')];
-  })];
-  const ws = rows.map(r => '<row>' + r.map(c => `<c t="inlineStr"><is><t>${escXml(String(c))}</t></is></c>`).join('') + '</row>').join('');
-  const xl = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  if (typeof JSZip === 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    s.onload = () => exportExcel();
+    s.onerror = () => { exportCSV(); showToast('Excel no disponible – exportado como CSV'); };
+    document.head.appendChild(s);
+    return;
+  }
+
+  // Sheet 1: individual orders
+  const rows1 = [['Nombre','Comida','Bebida','Extras','Total ($)'],
+    ...state.people.map(p => {
+      const o = state.orders[p] || {};
+      return [p, o.food||'', o.drink||'', (o.extras||[]).join(', '), calcOrderTotal(o).toFixed(2)];
+    })
+  ];
+
+  // Sheet 2: product summary
+  const rows2 = [['Producto','Precio','Cantidad','Total generado']];
+  const all = [...state.foods, ...state.drinks, ...state.extras];
+  all.forEach(prod => {
+    let count = 0;
+    state.people.forEach(p => {
+      const o = state.orders[p] || {};
+      if (o.food === prod.nombre) count++;
+      if (o.drink === prod.nombre) count++;
+      if ((o.extras||[]).includes(prod.nombre)) count++;
+    });
+    rows2.push([prod.nombre, prod.precio.toFixed(2), count, (count * prod.precio).toFixed(2)]);
+  });
+  const grandTotal = state.people.reduce((s,p) => s + calcOrderTotal(state.orders[p]||{}), 0);
+  rows2.push(['','','TOTAL', grandTotal.toFixed(2)]);
+
+  const makeSheet = rows => {
+    const ws = rows.map(r =>
+      '<row>' + r.map(c => `<c t="inlineStr"><is><t>${escXml(String(c))}</t></is></c>`).join('') + '</row>'
+    ).join('');
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${ws}</sheetData></worksheet>`;
+  };
+
+  const wbXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
           xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-  <sheets><sheet name="Pedidos" sheetId="1" r:id="rId1"/></sheets>
+  <sheets>
+    <sheet name="Pedidos" sheetId="1" r:id="rId1"/>
+    <sheet name="Resumen" sheetId="2" r:id="rId2"/>
+  </sheets>
 </workbook>`;
-  const sheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${ws}</sheetData></worksheet>`;
-  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+  const wbRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/>
 </Relationships>`;
+
   const ct = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
   <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+  <Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
 </Types>`;
 
-  // Use JSZip if available; otherwise fall back to CSV with xlsx extension notice
-  if (typeof JSZip !== 'undefined') {
-    const zip = new JSZip();
-    zip.file('[Content_Types].xml', ct);
-    zip.folder('_rels').file('.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`);
-    zip.folder('xl').file('workbook.xml', xl);
-    zip.folder('xl/_rels').file('workbook.xml.rels', rels);
-    zip.folder('xl/worksheets').file('sheet1.xml', sheet);
-    zip.generateAsync({type:'blob'}).then(b => { downloadBlob(b,'pedidos.xlsx'); showToast('✓ Excel descargado'); });
-  } else {
-    // Load JSZip dynamically
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    s.onload = () => exportExcel();
-    s.onerror = () => { exportCSV(); showToast('Excel no disponible – exportado como CSV'); };
-    document.head.appendChild(s);
-  }
+  const rootRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+</Relationships>`;
+
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', ct);
+  zip.folder('_rels').file('.rels', rootRels);
+  const xl = zip.folder('xl');
+  xl.file('workbook.xml', wbXml);
+  xl.folder('_rels').file('workbook.xml.rels', wbRels);
+  xl.folder('worksheets').file('sheet1.xml', makeSheet(rows1));
+  xl.folder('worksheets').file('sheet2.xml', makeSheet(rows2));
+
+  zip.generateAsync({ type: 'blob' }).then(b => {
+    downloadBlob(b, 'pedidos_food_order.xlsx');
+    showToast('✓ Excel descargado');
+  });
 }
 
-function exportSummary() {
-  const foodCounts = {}, drinkCounts = {}, extraCounts = {};
-  state.foods.forEach(f => foodCounts[f] = 0);
-  state.drinks.forEach(d => drinkCounts[d] = 0);
-  state.extras.forEach(e => extraCounts[e] = 0);
-  Object.values(state.orders).forEach(o => {
-    if(o.food && foodCounts[o.food]!==undefined) foodCounts[o.food]++;
-    if(o.drink && drinkCounts[o.drink]!==undefined) drinkCounts[o.drink]++;
-    (o.extras||[]).forEach(e => { if(extraCounts[e]!==undefined) extraCounts[e]++; });
-  });
+function exportSummaryFile() {
+  const grandTotal = state.people.reduce((s, p) => s + calcOrderTotal(state.orders[p]||{}), 0);
+  let txt = 'RESUMEN DE PEDIDO\n=================\n\n';
 
-  let txt = 'RESUMEN DE PEDIDO\n';
-  txt += '=================\n\n';
-  txt += 'COMIDAS\n-------\n';
-  Object.entries(foodCounts).forEach(([k,v]) => { txt += `${k}: ${v}\n`; });
-  txt += '\nBEBIDAS\n-------\n';
-  Object.entries(drinkCounts).forEach(([k,v]) => { txt += `${k}: ${v}\n`; });
-  if (state.extras.length) {
-    txt += '\nEXTRAS\n------\n';
-    Object.entries(extraCounts).forEach(([k,v]) => { txt += `${k}: ${v}\n`; });
-  }
+  const printGroup = (title, cat) => {
+    txt += `${title}\n${'-'.repeat(title.length)}\n`;
+    const counts = {};
+    state[cat].forEach(p => counts[p.nombre] = 0);
+    state.people.forEach(person => {
+      const o = state.orders[person] || {};
+      if (cat === 'foods' && o.food && counts[o.food] !== undefined) counts[o.food]++;
+      if (cat === 'drinks' && o.drink && counts[o.drink] !== undefined) counts[o.drink]++;
+      if (cat === 'extras') (o.extras||[]).forEach(ex => { if (counts[ex] !== undefined) counts[ex]++; });
+    });
+    Object.entries(counts).forEach(([name, cnt]) => {
+      const prod = state[cat].find(p => p.nombre === name);
+      const rev = cnt * (prod ? prod.precio : 0);
+      txt += `${name}: ${cnt}  →  ${fmt(rev)}\n`;
+    });
+    txt += '\n';
+  };
+
+  printGroup('COMIDAS', 'foods');
+  printGroup('BEBIDAS', 'drinks');
+  if (state.extras.length) printGroup('EXTRAS', 'extras');
+  txt += `TOTAL ESPERADO: ${fmt(grandTotal)}\n`;
+
   download(txt, 'resumen_pedido.txt', 'text/plain');
   showToast('✓ Resumen descargado');
 }
 
-function escXml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function download(content, filename, mime) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([content], {type: mime}));
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-function downloadBlob(blob, filename) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
 /* ============================================================
-   RESET
+   RESET ALL ORDERS
    ============================================================ */
 function confirmReset() {
-  showConfirm('Reiniciar evento', 'Se borrarán TODOS los pedidos actuales. Los participantes y opciones se mantendrán.', 'Reiniciar', () => {
+  showConfirm('Reiniciar evento', 'Se borrarán TODOS los pedidos. Participantes y productos se mantienen.', 'Reiniciar', () => {
     state.orders = {};
     state.people.forEach(initOrderSlot);
     save();
     showTab('orders');
-    renderOrderList();
     showToast('✓ Pedidos reiniciados');
   });
 }
@@ -843,8 +1267,8 @@ function showConfirm(title, msg, okLabel, cb) {
   document.getElementById('confirm-ok-btn').textContent = okLabel;
   document.getElementById('confirm-overlay').classList.add('open');
 }
-function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback=null; }
-function doConfirmAction() { closeConfirm(); if(confirmCallback) confirmCallback(); }
+function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
+function doConfirmAction() { closeConfirm(); if (confirmCallback) confirmCallback(); }
 
 /* ============================================================
    TOAST
@@ -855,7 +1279,34 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+}
+function escXml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function download(content, filename, mime) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content], { type: mime }));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 </script>
 </body>
